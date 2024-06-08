@@ -65,7 +65,6 @@ body {
 
 .box-hyperlink:hover {
     filter: invert(100%);
-    background: black;
 }
 
 .box-hyperlink:last-child {
@@ -81,4 +80,10 @@ body {
 
 .box-hyperlink-text {
     font-size: 1.5em;
+}
+
+@media screen and (max-width: 900px) {
+    #box {
+        width: 75%;
+    }
 }
