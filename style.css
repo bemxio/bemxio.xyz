@@ -23,6 +23,13 @@ body {
     text-align: center;
 }
 
+#box-image {
+    width: 80%;
+    height: 25%;
+
+    margin-bottom: 5%;
+}
+
 #box-title {
     font-size: 5em;
     font-weight: bold;
@@ -48,7 +55,7 @@ body {
 
     margin-bottom: 5%;
 
-    background-color: #282828;
+    background-color: #1e1e1e;
     color: white;
 
     transition-duration: 0.4s;
