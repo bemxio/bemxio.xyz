@@ -5,6 +5,9 @@ body {
     color: #ffffff;
 
     font-family: "Ubuntu", sans-serif;
+
+    --cube-size: 150px;
+    --transition-duration: 0.4s;
 }
 
 /* main container for everything */
@@ -23,10 +26,10 @@ body {
     background-color: #141414;
     text-align: center;
 
-    transition-duration: 0.4s;
+    transition-duration: var(--transition-duration);
 }
 
-#container-image {
+#container-face {
     width: 80%;
     height: 25%;
 
@@ -53,7 +56,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    transition-duration: 0.4s;
+    transition-duration: var(--transition-duration);
 
     width: 100%;
     height: 7.5vh;
@@ -85,6 +88,24 @@ body {
     font-size: 1.5em;
 }
 
+/* secret button for activating the cube ;) */
+#cube-activator {
+    display: none;
+
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    font-size: 2em;
+
+    top: 0%;
+    left: 0%;
+
+    color: #252525;
+
+    user-select: none;
+    cursor: pointer;
+}
+
 /* the bemxio cube */
 @keyframes rotation {
     from {
@@ -97,12 +118,10 @@ body {
 }
 
 #container-cube {
-    --size: 150px;
-
     background-image: url("/assets/embed.png");
 
-    width: var(--size);
-    height: var(--size);
+    width: var(--cube-size);
+    height: var(--cube-size);
 
     margin: 5% auto 10%;
 
@@ -127,27 +146,27 @@ body {
 }
 
 #container-cube-front {
-    transform: rotateX(0deg) translateZ(calc(var(--size) / 2));
+    transform: rotateX(0deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 #container-cube-back {
-    transform: rotateX(-180deg) translateZ(calc(var(--size) / 2));
+    transform: rotateX(-180deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 #container-cube-left {
-    transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
+    transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 #container-cube-right {
-    transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
+    transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 #container-cube-up {
-    transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
+    transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 #container-cube-down {
-    transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
+    transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
 /* responsive design!!! very awesome */
