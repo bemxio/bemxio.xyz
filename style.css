@@ -7,7 +7,8 @@ body {
     font-family: "Ubuntu", sans-serif;
 }
 
-#box {
+/* main container for everything */
+#container {
     position: absolute;
     transform: translate(-50%, -50%);
 
@@ -15,7 +16,7 @@ body {
     left: 50%;
 
     padding: 40px;
-    
+
     width: 25%;
     height: fit-content;
 
@@ -25,28 +26,28 @@ body {
     transition-duration: 0.4s;
 }
 
-#box-image {
+#container-image {
     width: 80%;
     height: 25%;
 
     margin-bottom: 5%;
 }
 
-#box-title {
+#container-title {
     font-size: 5em;
     font-weight: bold;
 }
 
-#box-subtitle {
+#container-subtitle {
     margin-bottom: 5%;
 }
 
-#box-hyperlinks {
+#container-hyperlinks {
     width: 100%;
     height: 100%;
 }
 
-.box-hyperlink {
+.container-hyperlink {
     display: flex;
 
     justify-content: center;
@@ -65,27 +66,93 @@ body {
     text-decoration: none;
 }
 
-.box-hyperlink:hover {
+.container-hyperlink:hover {
     filter: invert(100%);
 }
 
-.box-hyperlink:last-child {
+.container-hyperlink:last-child {
     margin-bottom: 0;
 }
 
-.box-hyperlink-logo {
+.container-hyperlink-logo {
     width: 7.5%;
     height: auto;
 
     margin-right: 2.5%;
 }
 
-.box-hyperlink-text {
+.container-hyperlink-text {
     font-size: 1.5em;
 }
 
+/* the bemxio cube */
+@keyframes rotation {
+    from {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    to {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+#container-cube {
+    --size: 150px;
+
+    background-image: url("/assets/embed.png");
+
+    width: var(--size);
+    height: var(--size);
+
+    margin: 5% auto 10%;
+
+    transform-style: preserve-3d;
+    animation: rotation 5s linear infinite;
+
+    display: none;
+}
+
+.container-cube-face {
+    position: absolute;
+
+    width: inherit;
+    height: inherit;
+
+    background-image: inherit;
+
+    background-size: 100%;
+    background-position: center;
+
+    user-select: none;
+}
+
+#container-cube-front {
+    transform: rotateX(0deg) translateZ(calc(var(--size) / 2));
+}
+
+#container-cube-back {
+    transform: rotateX(-180deg) translateZ(calc(var(--size) / 2));
+}
+
+#container-cube-left {
+    transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
+}
+
+#container-cube-right {
+    transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
+}
+
+#container-cube-up {
+    transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
+}
+
+#container-cube-down {
+    transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
+}
+
+/* responsive design!!! very awesome */
 @media screen and (max-width: 1000px) {
-    #box {
+    #container {
         width: 75%;
     }
 }
