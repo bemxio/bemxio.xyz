@@ -29,28 +29,28 @@ body {
     transition-duration: var(--transition-duration);
 }
 
-#container-face {
+#face {
     width: 80%;
     height: 25%;
 
     margin-bottom: 5%;
 }
 
-#container-title {
+#title {
     font-size: 5em;
     font-weight: bold;
 }
 
-#container-subtitle {
+#subtitle {
     margin-bottom: 5%;
 }
 
-#container-hyperlinks {
+#hyperlinks {
     width: 100%;
     height: 100%;
 }
 
-.container-hyperlink {
+.hyperlink {
     display: flex;
 
     justify-content: center;
@@ -69,22 +69,22 @@ body {
     text-decoration: none;
 }
 
-.container-hyperlink:hover {
+.hyperlink:hover {
     filter: invert(100%);
 }
 
-.container-hyperlink:last-child {
+.hyperlink:last-child {
     margin-bottom: 0;
 }
 
-.container-hyperlink-logo {
+.hyperlink-logo {
     width: 7.5%;
     height: auto;
 
     margin-right: 2.5%;
 }
 
-.container-hyperlink-text {
+.hyperlink-text {
     font-size: 1.5em;
 }
 
@@ -99,7 +99,7 @@ body {
     }
 }
 
-#container-cube {
+#cube {
     background-image: url("/assets/embed.png");
 
     width: var(--cube-size);
@@ -113,7 +113,7 @@ body {
     display: none;
 }
 
-.container-cube-face {
+.cube-face {
     position: absolute;
 
     width: inherit;
@@ -127,28 +127,41 @@ body {
     user-select: none;
 }
 
-#container-cube-front {
+#cube-front {
     transform: rotateX(0deg) translateZ(calc(var(--cube-size) / 2));
 }
 
-#container-cube-back {
+#cube-back {
     transform: rotateX(-180deg) translateZ(calc(var(--cube-size) / 2));
 }
 
-#container-cube-left {
+#cube-left {
     transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
-#container-cube-right {
+#cube-right {
     transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
-#container-cube-up {
+#cube-up {
     transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
 }
 
-#container-cube-down {
+#cube-down {
     transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+#footer {
+    position: absolute;
+    transform: translate(0%, -50%);
+
+    bottom: 0;
+    right: 0;
+
+    font-size: 0.75em;
+    margin-right: 5px;
+
+    color: #484848;
 }
 
 /* responsive design!!! very awesome */

@@ -11,9 +11,9 @@ const loremIpsum = [
 // cheat codes
 const cheatCodes = {
     "3d": () => {
-        const cube = document.getElementById("container-cube");
-        const face = document.getElementById("container-face");
-        const subtitle = document.getElementById("container-subtitle");
+        const cube = document.getElementById("cube");
+        const face = document.getElementById("face");
+        const subtitle = document.getElementById("subtitle");
 
         pop.play();
 
@@ -22,23 +22,18 @@ const cheatCodes = {
 
         subtitle.textContent = "the bem cube";
     },
-
     "lorem": () => {
-        pop.play();
-
-        const body = document.body;
         let index = 0;
+        
+        pop.play();
+        document.body.style.fontSize = "0.75em";
 
-        //body.style.setProperty("--transition-duration", "0s");
-        body.style.setProperty("font-size", "0.75em");
-
-        body.querySelectorAll("*").forEach((element) => {
+        document.body.querySelectorAll("*").forEach((element) => {
             if (element.children.length > 0 || !element.textContent) {
                 return;
             }
 
-            element.textContent = loremIpsum[index % loremIpsum.length];
-            index++;
+            element.textContent = loremIpsum[index++ % loremIpsum.length];
         });
     }
 };
@@ -51,7 +46,7 @@ document.addEventListener("keydown", (event) => {
         return;
     }
 
-    buffer += event.key;
+    buffer += event.key.toLowerCase();
 
     if (buffer in cheatCodes) {
         cheatCodes[buffer]();
