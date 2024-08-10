@@ -1,6 +1,9 @@
 // constants
 const pop = new Audio("/assets/pop.mp3");
-const speed = 5;
+
+const moveSpeed = 5;
+const turnSpeed = 5;
+const driftSpeed = 0.1;
 
 // cheat codes
 const cheatCodes = {
@@ -18,11 +21,7 @@ const cheatCodes = {
     },
     "arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba": () => {
         const player = document.getElementById("player");
-        
-        let upPressed = false;
-        let downPressed = false;
-        let leftPressed = false;
-        let rightPressed = false;
+        const subtitle = document.getElementById("subtitle");
 
         let x = 500;
         let y = 250;
@@ -30,9 +29,16 @@ const cheatCodes = {
 
         let drift = 0.0;
 
+        let upPressed = false;
+        let downPressed = false;
+        let leftPressed = false;
+        let rightPressed = false;
+
         pop.play();
+
         player.style.display = "block";
-        
+        subtitle.textContent = "fly around the page!";
+
         document.addEventListener("keydown", (event) => {
             switch (event.key) {
                 case "ArrowUp":
@@ -60,23 +66,30 @@ const cheatCodes = {
 
         setInterval(() => {
             if (upPressed) {
-                x += speed * Math.sin(rotation * Math.PI / 180);
-                y -= speed * Math.cos(rotation * Math.PI / 180);
+                drift = Math.max(-1.0, drift - driftSpeed);
             } else if (downPressed) {
-                x -= speed * Math.sin(rotation * Math.PI / 180);
-                y += speed * Math.cos(rotation * Math.PI / 180);
+                drift = Math.min(1.0, drift + driftSpeed);
             }
 
+            x -= moveSpeed * Math.sin(rotation * Math.PI / 180) * drift;
+            y += moveSpeed * Math.cos(rotation * Math.PI / 180) * drift;
+
             if (leftPressed) {
-                rotation -= speed;
+                rotation -= turnSpeed;
             } else if (rightPressed) {
-                rotation += speed;
+                rotation += turnSpeed;
             }
 
             player.style.left = `${x}px`;
             player.style.top = `${y}px`;
 
             player.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+
+            if (drift > 0) {
+                drift = Math.max(0, drift - (driftSpeed / 2));
+            } else if (drift < 0) {
+                drift = Math.min(0, drift + (driftSpeed / 2));
+            }
         }, 1000 / 60);
     }
 };
