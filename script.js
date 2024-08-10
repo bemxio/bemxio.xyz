@@ -1,12 +1,6 @@
 // constants
 const pop = new Audio("/assets/pop.mp3");
-const loremIpsum = [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-];
+const speed = 5;
 
 // cheat codes
 const cheatCodes = {
@@ -22,19 +16,68 @@ const cheatCodes = {
 
         subtitle.textContent = "the bem cube";
     },
-    "lorem": () => {
-        let index = 0;
+    "arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba": () => {
+        const player = document.getElementById("player");
         
-        pop.play();
-        document.body.style.fontSize = "0.75em";
+        let upPressed = false;
+        let downPressed = false;
+        let leftPressed = false;
+        let rightPressed = false;
 
-        document.body.querySelectorAll("*").forEach((element) => {
-            if (element.children.length > 0 || !element.textContent) {
-                return;
+        let x = 500;
+        let y = 250;
+        let rotation = 0;
+
+        let drift = 0.0;
+
+        pop.play();
+        player.style.display = "block";
+        
+        document.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "ArrowUp":
+                    upPressed = true; break;
+                case "ArrowDown":
+                    downPressed = true; break;
+                case "ArrowLeft":
+                    leftPressed = true; break;
+                case "ArrowRight":
+                    rightPressed = true; break;
+            }
+        });
+        document.addEventListener("keyup", (event) => {
+            switch (event.key) {
+                case "ArrowUp":
+                    upPressed = false; break;
+                case "ArrowDown":
+                    downPressed = false; break;
+                case "ArrowLeft":
+                    leftPressed = false; break;
+                case "ArrowRight":
+                    rightPressed = false; break;
+            }
+        });
+
+        setInterval(() => {
+            if (upPressed) {
+                x += speed * Math.sin(rotation * Math.PI / 180);
+                y -= speed * Math.cos(rotation * Math.PI / 180);
+            } else if (downPressed) {
+                x -= speed * Math.sin(rotation * Math.PI / 180);
+                y += speed * Math.cos(rotation * Math.PI / 180);
             }
 
-            element.textContent = loremIpsum[index++ % loremIpsum.length];
-        });
+            if (leftPressed) {
+                rotation -= speed;
+            } else if (rightPressed) {
+                rotation += speed;
+            }
+
+            player.style.left = `${x}px`;
+            player.style.top = `${y}px`;
+
+            player.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+        }, 1000 / 60);
     }
 };
 
@@ -42,10 +85,6 @@ const cheatCodes = {
 let buffer = "";
 
 document.addEventListener("keydown", (event) => {
-    if (event.key.length !== 1) {
-        return;
-    }
-
     buffer += event.key.toLowerCase();
 
     if (buffer in cheatCodes) {

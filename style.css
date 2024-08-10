@@ -164,6 +164,22 @@ body {
     color: #484848;
 }
 
+/* konami code easter egg */
+#player {
+    display: none;
+
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    background-image: url("/assets/player_engine.png"), url("/assets/player_base.png");
+
+    width: 48px;
+    height: 48px;
+
+    user-select: none;
+    z-index: 1;
+}
+
 /* responsive design!!! very awesome */
 @media screen and (max-width: 1000px) {
     #container {
