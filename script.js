@@ -3,7 +3,7 @@ const pop = new Audio("/assets/pop.mp3");
 
 const moveSpeed = 5;
 const turnSpeed = 5;
-const driftSpeed = 0.1;
+const accelerationSpeed = 0.1;
 
 // cheat codes
 const cheatCodes = {
@@ -21,13 +21,14 @@ const cheatCodes = {
     },
     "arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba": () => {
         const player = document.getElementById("player");
+        const effect = document.getElementById("player-effect");
         const subtitle = document.getElementById("subtitle");
 
-        let x = 500;
-        let y = 250;
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 4;
         let rotation = 0;
 
-        let drift = 0.0;
+        let acceleration = 0.0;
 
         let upPressed = false;
         let downPressed = false;
@@ -66,13 +67,13 @@ const cheatCodes = {
 
         setInterval(() => {
             if (upPressed) {
-                drift = Math.max(-1.0, drift - driftSpeed);
+                acceleration = Math.max(-1.0, acceleration - accelerationSpeed);
             } else if (downPressed) {
-                drift = Math.min(1.0, drift + driftSpeed);
+                acceleration = Math.min(1.0, acceleration + accelerationSpeed);
             }
 
-            x -= moveSpeed * Math.sin(rotation * Math.PI / 180) * drift;
-            y += moveSpeed * Math.cos(rotation * Math.PI / 180) * drift;
+            x -= moveSpeed * Math.sin(rotation * Math.PI / 180) * acceleration;
+            y += moveSpeed * Math.cos(rotation * Math.PI / 180) * acceleration;
 
             if (leftPressed) {
                 rotation -= turnSpeed;
@@ -80,15 +81,20 @@ const cheatCodes = {
                 rotation += turnSpeed;
             }
 
+            if (acceleration > 0) {
+                acceleration = Math.max(0, acceleration - (accelerationSpeed / 2));
+            } else if (acceleration < 0) {
+                acceleration = Math.min(0, acceleration + (accelerationSpeed / 2));
+            }
+
             player.style.left = `${x}px`;
             player.style.top = `${y}px`;
-
             player.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
 
-            if (drift > 0) {
-                drift = Math.max(0, drift - (driftSpeed / 2));
-            } else if (drift < 0) {
-                drift = Math.min(0, drift + (driftSpeed / 2));
+            if (upPressed || downPressed) {
+                effect.style.backgroundPosition = `-48px -48px`;
+            } else {
+                effect.style.backgroundPosition = `0 0`;
             }
         }, 1000 / 60);
     }
