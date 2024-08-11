@@ -20,11 +20,11 @@ const cheatCodes = {
         subtitle.textContent = "the bem cube";
     },
     "arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba": () => {
-        const player = document.getElementById("player");
+        const spaceship = document.getElementById("spaceship");
         const subtitle = document.getElementById("subtitle");
 
-        const effect = document.getElementById("player-effect");
-        const sound = new Audio("assets/player_engine_sound.mp3");
+        const effect = document.getElementById("spaceship-effect");
+        const sound = new Audio("assets/spaceship_engine_sound.mp3"); // synthetic low-rev engine.wav by Timbre -- https://freesound.org/s/115271/ -- License: Attribution NonCommercial 4.0
 
         let x = window.innerWidth / 2;
         let y = window.innerHeight / 4;
@@ -39,7 +39,7 @@ const cheatCodes = {
 
         pop.play();
 
-        player.style.display = "block";
+        spaceship.style.display = "block";
         subtitle.textContent = "fly around the page!";
 
         sound.loop = true;
@@ -91,9 +91,9 @@ const cheatCodes = {
                 acceleration = Math.min(0, acceleration + (accelerationSpeed / 2));
             }
 
-            player.style.left = `${x}px`;
-            player.style.top = `${y}px`;
-            player.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+            spaceship.style.left = `${x}px`;
+            spaceship.style.top = `${y}px`;
+            spaceship.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
 
             if (upPressed || downPressed) {
                 effect.style.backgroundPosition = `-48px -48px`;
