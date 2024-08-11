@@ -21,8 +21,10 @@ const cheatCodes = {
     },
     "arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba": () => {
         const player = document.getElementById("player");
-        const effect = document.getElementById("player-effect");
         const subtitle = document.getElementById("subtitle");
+
+        const effect = document.getElementById("player-effect");
+        const sound = new Audio("assets/player_engine_sound.mp3");
 
         let x = window.innerWidth / 2;
         let y = window.innerHeight / 4;
@@ -39,6 +41,8 @@ const cheatCodes = {
 
         player.style.display = "block";
         subtitle.textContent = "fly around the page!";
+
+        sound.loop = true;
 
         document.addEventListener("keydown", (event) => {
             switch (event.key) {
@@ -93,8 +97,10 @@ const cheatCodes = {
 
             if (upPressed || downPressed) {
                 effect.style.backgroundPosition = `-48px -48px`;
+                sound.play();
             } else {
                 effect.style.backgroundPosition = `0 0`;
+                sound.pause();
             }
         }, 1000 / 60);
     }

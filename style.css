@@ -100,7 +100,7 @@ body {
 }
 
 #cube {
-    background-image: url("/assets/embed.png");
+    background-image: url("assets/embed.png");
 
     width: var(--cube-size);
     height: var(--cube-size);
@@ -171,7 +171,7 @@ body {
     position: absolute;
     transform: translate(-50%, -50%);
 
-    background-image: url("/assets/player_engine.png"), url("/assets/player_base.png");
+    background-image: url("assets/player_engine.png"), url("assets/player_base.png");
 
     width: 48px;
     height: 48px;
@@ -186,7 +186,7 @@ body {
     width: inherit;
     height: inherit;
 
-    background-image: url("/assets/player_engine_effect.png");
+    background-image: url("assets/player_engine_effect.png");
     background-position: 0 0;
 }
 
